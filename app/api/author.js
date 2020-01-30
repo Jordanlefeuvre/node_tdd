@@ -4,7 +4,7 @@ module.exports = (app, db) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName
         })
-        await authors.save().then((result) => res.json(result))
+        authors.save().then((result) => res.json(result))
     })
   
     app.get('/authors', async (req, res) => {
