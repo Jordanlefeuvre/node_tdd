@@ -4,8 +4,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AuthorSchema = new Schema({
-    firstName: { type: String, default: ''},
-    lastName: { type: String, default: ''}
+    firstName: String,
+    lastName: String
 });
 
-module.exports = mongoose.model("Author", AuthorSchema);
+AuthorSchema.methods.getPosts = async function() {
+    return this.model('Posts').find({ AuthorId: this._id})
+}
+
+module.exports = mongoose.model("authors", AuthorSchema,"authors");

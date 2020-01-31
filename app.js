@@ -4,19 +4,21 @@ const bodyParser = require('body-parser')
 const postRoutes = require('./app/api/post')
 const authorRoutes = require('./app/api/author')
 const authorModels = require('./models_mongo/author')
-// const mongoose = require('mongoose')
-const db = {
-    Author : authorModels,
-    postRoutes : postRoutes
-}
+const postModels = require('./models_mongo/post')
+// const mongoose = require('mongoose').
+const db = require('./models_mongo')
+// const db = {
+//     Author : authorModels,
+//     Post : postModels
+// }
 const app = express()
 
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 
-mongoose.connect("mongodb+srv://root:root@cluster0-tnzko.mongodb.net/test?retryWrites=true&w=majority").then(
-    () => console.log("Connexion à la base OK"),
-    err => console.error("Erreur lors de la connexion : "+err)
-); 
+// mongoose.connect("mongodb+srv://root:root@cluster0-tnzko.mongodb.net/test?retryWrites=true&w=majority").then(
+//     () => console.log("Connexion à la base OK"),
+//     err => console.error("Erreur lors de la connexion : "+err)
+// ); 
 
 // mongoose.connect("mongodb+srv://root:root@cluster0-tnzko.mongodb.net/test?retryWrites=true&w=majority")
 // var db = mongoose.connection
@@ -58,6 +60,6 @@ app.get('/', (req, res) => {
 //     }).then((result) => res.json(result))
 // })  
 
-// postRoutes(app, db)
+postRoutes(app, db)
 authorRoutes(app, db)
 module.exports = app
